@@ -12,18 +12,18 @@ select 'update venda_itens set id_venda='||id_liberacao||' where id_venda='||id|
  
 
 =============================== CONTAS A RECEBER ================================
-delete from receber;  ------------ 0Basicao
----------------------------------- LOTUS ------------------------------
+delete from receber;  
+
 alter table receber add id_receber character varying (10);
 
 select 'insert into receber (id, id_cliente, id_empresa, id_venda, id_vendedor, id_portador, status, data_compra, tot_compra, data_vecto, valor_doc, valor_pag, parc_num, parc_qtd, historico, data_lanca, valor_doc_original, id_receber) values (get_id(''RECEBER''), '||id_cliente_lotus||',1, '||DOCUMENTO||', 00001, 1, '||IIF(DATABAIXA IS NULL,0,1)||', '''||DATAHORAALTERACAO||''','||VALOR||','''||VENCIMENTO||''','||VALOR||', 0, 1,1,''VENDA'', '''||DATAHORAALTERACAO||''', '||VALOR||', '''||DOCUMENTO||''');' FROM TRECPARCELA
 
---------------------------- LOTUS > ECO ------------------------------
+--------------------------------------------------------------------------
 alter table TRECPARCELA add id_lotus int;
 select 'update TRECPARCELA A set A.id_lotus='||id||' where A.DOCUMENTO='''||id_receber||''';' from receber order by id
---------------------------- ECO > LOTUS ------------------------------
+---------------------------------------------------------
 select 'update receber set id_venda='||a.DOCUMENTO||' where id='||id_lotus||';' from TRECPARCELA a ORDER BY ID_LOTUS
---------------------------- LOTUS > LOTUS ----------------------------
+-------------------------------------------------------
 select ' update receber set id_venda='||id_liberacao||' where id_venda='||id||' AND data_compra='''||data_venda||''';' from venda where data_venda between '2019-08-01' and '2019-08-20' order by id
 
 update receber set data_compra=data_vecto where data_vecto<'2018-12-31';

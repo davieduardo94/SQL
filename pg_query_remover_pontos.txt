@@ -1,0 +1,7 @@
+update produto set id_ncm="replace"(id_ncm, '.','')
+
+
+update tabela set coluna="replace"(coluna, '.','')
+
+
+update pessoa set nome_razao="replace"(nome_razao,'**','')

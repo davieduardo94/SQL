@@ -33,17 +33,3 @@ update receber set data_compra=data_vecto where data_vecto<'2018-12-31';
 select 'update nfe_prc set id_venda='||id_liberacao||' where id_venda='||id||';' from venda order by id
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-

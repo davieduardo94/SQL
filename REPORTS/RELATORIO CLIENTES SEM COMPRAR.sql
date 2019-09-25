@@ -1,18 +1,22 @@
-
-select
-
-P.ID,
-p.nome_razao,
-p.cad_data,
-max(v.data_venda) as ULTIMA_COMPRA,
-V.ID AS VEMDA,
-count(v.id)
-from pessoa p
-join venda v on v.id_cliente=p.id
-where 
-p.id not in (select v.id_cliente from venda v where v.data_venda BETWEEN '2019-07-01' and '2019-07-31') 
-AND 
-v.data_venda BETWEEN '2019-05-01' and '2019-08-31' 
-GROUP BY 
-P.ID,p.nome_razao, p.cad_data,V.ID, v.data_venda 
-ORDER BY v.data_venda
+SELECT v.id_cliente,
+       p.nome_razao,
+       p.apelido_fantasia,
+       p.fone1,
+       pessoa1.nome_razao AS vendedor_nome,
+       max(v.data_venda) AS ULTIMA_COMPRA
+FROM venda v
+JOIN pessoa pessoa1 ON v.id_vendedor = pessoa1.id
+JOIN pessoa p ON v.id_cliente = p.id
+WHERE v.status=1
+  AND data_venda BETWEEN '2019-06-01' AND '2019-07-30'
+  AND v.id_cliente NOT IN
+    (SELECT id_cliente
+     FROM venda
+     WHERE data_venda>'2019-08-01')
+GROUP BY v.id_cliente,
+         p.nome_razao,
+         p.apelido_fantasia,
+         pessoa1.nome_razao,
+         p.fone1,
+         v.data_venda
+ORDER BY data_venda

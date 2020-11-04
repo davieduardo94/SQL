@@ -17,7 +17,7 @@ CASE
 		'ATENDIDO'
 		ELSE
 		'CANCELADO'
-END,
+END AS STATUS_ATENDIMENTO,
 c.user_agendou,
 u.login AS NOME_USUARIO,
 c.atendido_data as DATA_ATENDIMENTO,

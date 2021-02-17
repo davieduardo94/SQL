@@ -1,0 +1,1 @@
+update tabela set campo=replace(campo, '''','');

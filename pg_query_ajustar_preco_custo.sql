@@ -1,5 +1,8 @@
-update P set CUSTO=COMPRA where CUSTO=0 and CODIGO_EMPRESA=;
---------------------------------------------------------
-select 'update V_I set COMPRA_VL='||COMPRA||' where COD_VENDA in (select CODIGO from V where CODIGO_EMPRESA=) and COD_PRODUTO='||PROD_COD||';' from P_E where CODIGO_EMPRESA= and PROD_COD in (select CODIGO from P where status=0) and status=0 ORDER BY PROD_COD;
---------------------------------------------------------
-update V_I set CUSTO=COMPRA where COD_VENDA in (select CODIGO from V where CODIGO_EMPRESA=);
+select min(id) from V where EMPRESA=  and DATA>'2020-12-31';
+
+select 'update V_I set compra='||pcompra||', vpcusto='||pcompra||' where produto='||id_produto||' and ID_VENDA>= ;' from produto_empresa 
+where ID_EMPRESA= 
+and id_produto in 
+(select id_produto from venda_itens where ID_VENDA>= ) 
+and status=0 
+ORDER BY id_produto;
